@@ -1,0 +1,859 @@
+  <!-- 
+   Javascript  language basics
+  1 Variables
+  2 Data Types
+  3 Operators
+  4 Statments
+  5 Functions 
+
+  Variables
+  -------------
+  Variable is use to store data or value 
+  - variable have three phase of configuration
+    1 Declration     Ex:  var x;    Declared a variable 
+    2 Assignment     Ex:  x=10;     Assigned a value to variable 
+    3 Initialization Ex: var y=10;  Declared variable and assigned value to it is called initialization 
+
+  -->
+
+  <!-- 
+  IN js can use without creataing the varibale,Because js is not in strict mode
+  But some compiler are in strict mode then we must need to declare the variable 
+  <script>
+     x=10;
+      console log(x);
+
+  </script>
+
+  Output: 10
+  -->
+
+
+ ------------------------VARIABLES-------------------- 
+ ---------------------------JS------------------------ 
+
+  <!--
+  In js they are three types of variables
+  1 var      : It defines a function scope variable 
+           -- You can declare in any block of function and access from another block within the same function 
+           -- It allow declare,assignment,Initialization 
+           -- Var allows Shadowing
+               > we can re-assign the value to variables 
+           -- var allows Hoisting 
+              > Hoisting: It is a process of declraing after using the variable 
+              x=10;
+              Document write("x"+x);  It will throw error,varibale use without declaring 
+              var x; but in hoisting we can use that variable before declaring 
+  -->
+  function f1(){
+    var a;
+    a=10;
+    if(a==10){
+      var b=30;
+    }
+    document write("x : "+ a + "<br>"+ "b : "+b);   b is declare  another block but we can access that value 
+  }
+  f1();
+
+
+
+  2 let
+     - It is used to define ablock scope varibale 
+     - It is accessiable within the block and its inner block 
+
+     function outer_block(){
+       var a=10;
+      function block_inner(){
+            we can use that a variable in this block 
+          var b = 10;   Itis scope to this block only and its inner block 
+       }
+        but we cannot use that b variable in this block 
+     }
+     
+      - It allows Initializatio,Declaring,Assigning
+      - It will not Allowing Hosting and Shadowing
+      function outer()[
+         a=10;
+		function inner(){
+		let b=10;
+		let a=20;  it will give error
+		}
+		let a;   we cannot create hoisting
+		
+
+
+
+  3 const
+   - It is a block scope as same as let 
+   - it will allow only initilation 
+   - it will not allow declraing declration and assigining
+   - It will not allowing showding and hoisting 
+   function(){
+   const x =10;       Initialization only
+   const y;            error declration
+   y=10;              error assigning
+   function inner(){
+       const z=30;
+	   document write("z:"+z + " x:"+x);  we can acess x variable because it has inner block
+   }
+   document write("z:"+z + " x:"+x);  error we connot access z varriable 
+   
+   }
+   
+   -  By using const we can assign by using initialization memory 
+      function f(){
+      const pic = new Image();  
+	  pic src="hello";
+     document write(pic src);
+}
+f();
+
+
+
+
+----------------- Global scope;
+     Global Scope of variable is defined by declaring outside function and inside module scope 
+	 Each js file is a module 
+	 var x;
+var y=20;
+var z=100;
+function f(){
+    x=10;
+    document write(x);
+}
+function f1(){
+    document write(z);
+}
+f();
+f1();
+   Q ) Can we define global variable inside a function 
+      Yes
+	  First scenario:
+	  Remove strict mode in js file "use strict";,define a variable without var,let,const keywords 
+	 
+	 function f(){
+    x=10;
+   var a=100;
+    document write(x);
+}
+function f1(){
+    document write(x);
+    document write(a);
+}
+f();
+f1();
+
+	  Second Sceniero; 
+	  when we have strict mode and we need used that varaivbel global in function 
+	  We can use window method because it is bowser object model it can accessiable within whole browser 
+
+
+function f(){
+    "use strict"
+    window x=10;
+   var a=100;
+    document write(x);
+}
+function f1(){
+    document write(x);
+     document write(a);
+}
+f();
+f1();
+	  
+	  
+   
+----------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------- 
+   
+   Variable naming rules
+   -  Name must start with alphabate or underscore 
+   -  _ refers that variable requires futher inmplemantation
+       
+	      var product;    it functinoality is final and no need to change
+ 		  var _product;    It functionality is need to implement futer more 
+   - Name is case sensitive 
+   - name cna be 255 character 
+   - variable name is not in keyword 
+   - alaway use camelCase for name
+         ex:var userPassword;
+-----------------------------------------------------------------------------------------------
+Varibale Declaration in different ways
+
+var a=10;
+var b=20;
+var c=30;
+   or
+var a=10,b=10,c=10;     struct format of variables
+  or 
+var a=b=c=10;
+ var a;
+document write(a);   a=undefined ,Because there is no value in it 
+ Now we dont declrae b value and we use to print the value 
+document write(a+" "+b);   b is not defined 
+
+var b;
+a=b=10;
+document write(a+" "+b);
+
+---- ES6 introduce de-structring of variable,which allows to define multiple variables using [] meta character 
+    -- array destructing -> []
+	syntax:
+	var [item1,item2,item3]=[value1,valu2,value3];
+	
+      var [a,b,c]= [1,2,3];
+      [] each item iterate in a sequence order and assing value to the varibale 
+    
+	--object destructring -> {}
+	syntax:
+	var {item1,item2,item3} = {item1:value1,item2:value2,item3:value3};
+	                            here item1 is reference where the value is to stroe 
+ const {d,e,f} = {d:10,e:10,f:10};
+document write(e);
+But in this format there is no iteration, each variable is assign ti values by using key:value pair method 
+ 
+ ------------------------------------------------------------------------------------------------------------------
+ --------------------------------------------------------------------------------------------------------------------
+ 
+ Data Types:
+ 
+ - JavaScript is not strongly typed language 
+   Because in other languages we must give datatype to the variable,but in javaScript some cases it dosent require 
+   ex:  x=10;
+   document write(x);
+   here i didnt declare  variable but i have used that variable with no errors 
+ - There is no restriction for type 
+ - It is dynamic type or Implicity type 
+      var x; Undefined - value in x 
+       x=10; Number
+      if we reassign the value in x varibale it will change datatype accoring to the data is store in the variable then it is called implicity type 
+       x="hello"; String 
+       x=true;    Boolean
+ 
+ - To find what type of data that variable is holding  using typeof()method
+    ex: var x=10;
+	typeof(x);
+	
+	output:number
+	   
+In datatype we have two types
+   2 NON_primitive types
+   1 Primitive Types (Number,String,Boolean,Null,Undefined,Symbol)
+	     - Fixed range of values
+		 - Stored in memory stack[LIFO]
+	  
+	  Number:
+	  - isNaN() method is to find it is number or not.
+	  Parsing Method:
+	  -   parseInt()
+	  -   parseFloat()
+	  - Javascript provides parsing method to convert numeric string into number 
+	     A numeric string start with number and can contain chars
+		  Ex: "10"     valid
+		      "10A"    valid
+			  "A10"    invalid
+			  "10A20"  valid,it will display 10 after string encounter it will end the reading numbers 
+		function press(){
+           var rollnumber =parseInt(document getElementById("rollnumber") value);
+           rollnumber=rollnumber+2;
+           console log(rollnumber);
+           }
+		   here by using parseInt() we can change numberstring to sting 
+
+
+ Java Script provide variouds operators to handle numeric expressions
+  Expressions like(2+1*100-10/2) 
+
+    -  Operators are( + addition,-Substraction,* Multiplication,/Divide,% modulus,** Power,++ increment,-- Decrement)
+      - Javascript provide "Math"  object to handel numeric expression and mathematical operations.
+	  - A developer can convert a matehmatical or scientific equation into javascript expression by using Math.
+	     lkie     Math.PI
+		          Math.min
+				  Math.max
+				  Math.avg
+				  Math.sqrt
+				  Math.sin
+				  Math.pow...etc
+				  
+		   ex EMI formula in js:
+		   
+		        var EMI =P*r*Math.pow(1+r,n(power))/Math.pow(1+r,n(power))-1;
+	  
+----------------------------------------------------------------------------------------
+-------------------------------String----------------------------------------------------
+-----------------------------------------------------------------------------------------	  
+String is a literal with group of character enclosed in 
+a)Double Quotes    "--"
+b)Single quotes    '--'
+c)Backticks        `--`
+   
+   - Double and Single quotes inner and outter string.
+     var link = "<a>Home</a>";
+	 var link = "<a href="/.src/home.html">Home</a>";  invalid 
+	 Because we cannot use double quotes within double quotes.
+	        "--"--"--"  -->  invalid.
+	 we can use single quotes within double quotes.
+	 var link = "<a href='/.src/home.html'>Home</a>";
+	            or 
+	Single quotes is same as double quotes.
+	we can use wise-versa ofthese quotes
+	var link = '<a>Home</a>';
+	var link = '<a href="/.src/home.html">Home</a>';
+
+Var name = prompt("enter your name");
+var age = prompt("enter your age");
+var res = "Hello your name"+ name+" and your age is "+age ;
+Output: Hello your name isbaluand your age is22
+here we need spaces after name and age
+var res = "Hello your name "+ name+" and your age is "+age ;
+So we are using space in this string,Those are called Leading spaces.It was a bad programming.
+so we need to give extra space with +" "+ 
+var res = "Hello your name"+" "+ name+" "+"and your age is"+" "+age ;    VALID
+By writing the above line it take lot of time to check every spaceing in the lenghty string.
+
+----  In ES5 version were using Backtick.
+      - Backtick allows a string which can emded expression.
+	  - ES5 versions introduced Data binding expression ${}.
+	  DataBinding: Which is used to access the sources and present to the User-Interface. 
+      
+ var name = prompt("enter your name");
+var age = prompt("enter your age");
+var res = `Hello your name is ${name} and your age is ${age} .`;
+document.write(res);
+ 
+ 
+ - Serval chars in a string are non-printable chars.
+ - you can print the non-printable char by using "/"
+ - These are refered as escape sequence chars.
+        \n  -> New line
+        \t  -> Vertical tab
+        \v  -> Tab space
+ 
+   EX;
+   var path = "d:/img.png";  
+   here slash is non printable char.so to print that value
+   var path = "d://img.png";
+ 
+ 
+ - Javascript provides various string methods for formatting and manupliation.
+  String formatting methods:
+       bold(),italics(),fontcolor(),fontsize(),sup(),sub(),toUpperCase(),toLowerCase()....etc
+	   var iFsc =  document.getElementById("ifsc").value;
+     document.getElementById("ifsc").value=iFsc.toUpperCase();
+ 
+- JavaScript allows to fomat a string using style and class.
+string.style.attribute="value";
+Note: style attribute are witten in camelCase
+        background-color   -->  backgroundColor
+		text-align         -->  textAlign
+        margin-left        -->  marginLeft
+Here styles are not directly applied to the string,it applied to the element that handel string.
+        
+		error.innerHTML = "Username is mandatory";
+        error.style.color="red"; 
+		
+By using style we can apply some styles only,But if we want multiple styles apply to an element we use class.
+- Javascript use class to apply multiple styles to the element.
+
+
+-------   String Manpulations: FOR REERENCE GOTO JSPRATICE FILE -> STRINGMETHOD FILE
+
+1. length  : It return no of chars in a string.
+              String empty is verified by using empty quotes"".
+   
+   var s = "hello welcome to js pratice";
+   console.log(s.length());
+   
+   
+2. charAt   : It return the character  present in the specific feild.
+              The index start from 0. It void - no return type.
+			  var s = "welcome";
+			  s.charAt(0);  // w
+			  s.charAt(1);  // e
+			  s.charAt(2);  // l
+			  s.charAt(3);  // c
+			  s.charAt(4);  // o ...etc
+
+3. charCodeAt() : It return the ASCII code character present at specified index.
+                 var str = "ajay";
+			     str.charCodeAt(0);
+			     It will print a -> ASCII number.
+			 
+4. indexOf()  : It will retrun the index value.
+                 var str = "welcome";
+				 str.indexOf("e");
+				 It will retrun the index value of 1.
+		
+5.startsWith() :It return boolean true if string start with specified character.
+6. endsWith()  : It return boolean true if string ends with specified charaters.
+                  
+                 ex: if user enter skype account mail like balu@outlook.com
+				 so we need to verify that mail consist of outlook.com 
+				 
+				 if(mail.endsWith("outlook.com)){
+				     error.innerHTML=``;
+				 }else{
+				    error.innerHTML=`Provide a valid mail`;
+				 }				  
+	            
+These three methods has same functality but different logics
+
+7. slice()     : It read and return the chars between specified index.
+                  syntax:
+				  slice(startindex,endindex)  => read characters between start and end index.
+				  slice(startindex)           => It read chars from star index.
+				  It read chars in forward only
+				  ex: var str = "hello guys welcome";
+				  str.slice(2,8);  // llo guy
+				  str.slice(2.0);  // Invalid
+				  
+            
+9. substr()    :It read specific chars from give index
+                 syntax:
+				 substr(startindex,hom many chars to read)
+				 substr(2,9);
+				 it start from 2nd index and  read 9 chars from the starting index.
+				 
+				 
+8. substring()  :It read chars in bi-directional
+                 syntax: substring(startindex,endindex) end index can be any direction.
+		
+				 ex:  substring(7); //it read 7 to end
+				 substring(3,8);   //It read 3 to 8 index cahracters.
+				 substring(5,0);   //It read 5 to 0th index chars.
+				 
+10.split()      : It is used tio seperate a string by using a delimeter.
+                   syntax:split('delimeter');
+                    split() returns array    		
+var products = 'samsung tv-450000 , nike casuals-800000';
+var details = products.split(',');
+//console.log(details);  // It returns Array  ['samsung tv-450000 ', ' nike casuals-800000']
+//for small size details we use variable destructring
+var [tv,shoe] = products.split(',');
+document.write(`
+    <h2>shoe details</h2>
+    Name = ${shoe.substring(shoe.indexOf("-"),0)}
+    Price = ${shoe.substring(shoe.indexOf("-")+1)}
+    `);
+
+11.  trim()   :It is used to remove leading spaces.
+                It remove spaces befor and after string.
+				syntax:   split();
+				ex:  var str = "    john    ";
+				      console.log(str);         // ------john-----
+					  consle.log(str.trim());   //john
+   	  				
+12.  match()  :It verify your string by matchin it aganist a regular expression and return true if matched. 				 
+                syntax:
+				string.match(/regular expresion/);
+	Regular expressions ae built with meta character and quatifiers
+	
+	Meta charater:
+	
+	?     Zero or one occurance of any character.
+	       Ex:colour/color // u is different in both words. 
+		         s.match(/colou?r/);
+				 this means,it can take with u or without u.
+	
+          //Here name should be given color or colour.
+            var col = prompt("Enter the name: ");
+             if(col.match(/colou?r/)){
+             console.log(col);
+              }
+	
+	+       one or more occurance of character
+	        ex: colou*r  =>  colour,colouur,colouuur..etc.
+	
+	*       zero or more occurance of character
+	        ex: colou*r  ==> color,colour,colouur,colouuur...etc.
+	
+	.       any single charater.
+	        ex:  .at  ==> cat,bat,rat
+                  . -> single charater for .at --> c
+	
+	\       It changes the meta character into normal character and 
+	         Noraml character into meta character.
+			 
+			 Let take example of email box
+			 <dt>Email</dt>
+            <dd><input type="email" id="email" required></dd>
+			In input box it will check @ only in our mail 
+			   balu@gmail5com it will take any word in place of dot.
+			email.matched(/gmail\.com/)
+			
+			
+    |       It is used as OR ,allows multiple characters
+	         Ex:str.matched(/red|gree|yello|blue/)
+			 it allow to print those values only
+	
+	Expression:
+			 
+	\^      Expression start with.
+    $       Expression ends with.
+          when we write expressions   EX:   \^.......$	
+	
+	NOrmally d is usd to allow digits.But when we give d it takes as string so to make it meta character.
+	  
+	  d ===> \d   Now the \d is used to allow only numbers.
+	               number.match(/\d/)
+				   
+				   \d    --> 1,2,3,4,5,6,7..
+				   \d\d  -->11,22,33,44,55..
+				   \d?\d --> 1,22,44,22,5,..
+				   \d|\d --> 1,22,33,4,32,4,1,3...
+				   
+	\D       It allows no-numeric chars,alphabetsand special characers.
+	          EX: 
+                 name.match(/\D/)  
+				 it alow to write alphabets and special characters.
+				 A,a,#@!% --> allows
+	
+	
+	\w       It will allow word chars [A-Z,a-z,0-9,_]
+	
+	\W       It will allow only special charster or symbols only.
+	
+	\s       It allows space.
+	
+	\i        It ignore the case 
+	           EX;  pattern="colou?r";
+			   It is case ensitive we have to write onluy in smalle case
+			   To make it case sensitive ignor 
+			   Ex: pattern="colou?r\i";
+			   
+	[]         Random range
+	           [A-Z],[a-z],[A-za-z],[a-m],[0-9]...etc
+	()         union of charaters
+	
+	
+Quantifiers:
+    {n}     Exactly n-numer of chars allowed
+	        Ex: \d{10}  only 10 digits allowed.
+	
+    {n,m}   Lower bound -n upper bound -m
+             ex: \d{2,7} only allowed to 2 -7 numbers range.
+     
+    {n,}    lowerbound-n upper bound any number
+             ex:\d{2,}  accpet to allow min 2 and max any number values.
+
+Ex: write expression to validate the following format of phone number.
+       			 pattern="\+91\s\d{1-10}"; here + is a meta character so we need to convert into non meta characte using \
+				 
+  write expression foruk number
+  pattern="\+\(1\)\(\d{3}\)\s\d{3}-\d{4}";
+  
+  
+  
+ Pratice :
+ 1.Write an expression for validating email address
+      pattern="\w@[a-z]\.[a-z]";
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+
+Boolean: 
+ - boolean types are used in decision making.
+ - Javascript boolean types can handel 2 values
+   a)true
+   2)false
+ - javascript boolean expression can handle true and false as 0 and .
+     
+	 true=1
+	 false=0
+	
+	true+true=2
+	true+false=1
+	true+3=4
+
+
+Attributes inhtml which are boolean.
+- checked
+- selected
+- required
+- readonly
+- disable
+- boder in table 
+
+---------------------------------------------------------------------------------------------------
+Q. How to convert a numeric string into  number?
+    parseInt(),parseFloat()
+Q. How to convert a string to number?
+   toString()
+   var a=10;
+   a.toString();
+Q. How to convert a string to boolean?
+     I Have a scenerio like,As we knoe every thing from html we get in string format number,boolean
+	 By default checked is false,but i want to change intially it as true.
+	 
+	 <input type="checkbox" checked="true" id="check">
+	 <spanid="stock">out of stock</span>
+	 
+	 <script>
+	 var check = document.getElementById("check");
+	 var stock = document.getElementById("stock");
+	 var x = check.checked();
+      var y = (x=="true")?true:false;
+	  
+	 </script>
+
+
+-----------------------------------------------------------------------------------------------
+undefined:
+- It sepecifies there is no value defined in a reference.
+  var x;
+  document.write(x); //undefined
+  If a variable dosen't have any value in it then it is return as undefined.
+
+Q. Why javaScript return undefined if there is no value in variable.
+ Because it is impicity typed.variable required a value to determie according to data type.
+ if value is not present it is define as undefined dtat type.
+
+Q. How to verfie the value is defined in variable or not.
+   if(referncename){
+   }
+
+Q. what is difference between undefined and not defined.
+    undefined     -> value is not defined in a variable.
+	not defined   -> variable is not defined.
+
+---------------------------------------------------------------------------------------------
+
+null data type:
+Q. what is difference between undefined and null?
+   Both definations are same ,value is not present in varibale.But what is the diffrence is
+ 
+ -- undefined is configure by javascript for any reference if value is not found during compile time.
+   
+ -- null is configure by javascript for any reference if value is not found during runtime
+
+-----------------------------------------------------------------------------------------------------
+Symbol type;
+- Javascript introduce symbol type from ES6.
+- Earlier js use symbol type implicitly.
+Let tell you a scenerio, suppose if have a fom with usernam and password,when user give these dtails 
+and click submit it goes to database,but in database we need userid->unique id for store data
+,So we need to give uniqe id also but it dosent need to viable to the user.
+Ex:
+<form>
+    <dl>
+        <input type="hidden" name="userid" value="john">
+        <dt>Your name</dt>
+        <dd><input type="text" name="username"></dd>
+        <dt>age</dt>
+        <dd><input type="number" name="age"></dd>
+    </dl>
+    <button type="submit">submit</button>
+</form>
+
+- Here in html page we dosennt see the first input tag.
+- like this if we have single user we can give value inhtml but we have multiple users we use 
+  objects to deal with them.
+- it is used to configure unique identification key for objects.
+       objectName{
+	   username:'john',
+	   age:20
+	   }
+- symbol configure hidden feilds in objects,which is present in object but not used b the iterators.
+   var userid=Symbol();   
+   userdetails{
+   [userid] :"giddaluri",//It is not visiable to print and not accessiable to iterate.
+	username:"balu",
+	age=20
+	}
+	iterator:which is used to print the vvalues in objects.
+	for(propety in userdetaisl{
+	document.write(`${propety} : usedetails[propety]`);
+	}
+------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------
+How to configure a feild which can display value on scree but it will not submit?
+- if name is not defined for any feild in the form it is not submitted.
+<form>
+<input type="text" >  /name is not defined
+- if feild not in the form it will  not submitted
+- if feild is disable it will not submit.
+<input type="text" disable name="userid" value"john">
+------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------NON-PRIMITIVE--------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
+JavaScript Non primitive types
+- They are mutable.mutable means we can change size.
+- They don't hav efixed range of values.
+- Value range varies according to memory avaliable.
+- they store in heap memory.
+- JavaScript primitive types are    
+    1. array
+	2. object
+	3. map
+-----------------------------------------------------------------------------------------------------------
+Array:   
+Array reduces overhead by strorng values in sequential order.
+-- Array can reduce complexity by stroing multiple values under one name.
+-- javascript can stroe any type of values in,but which is not possiable for other languages.
+-- Array size can change dyanmically in js.
+
+
+Arrray configuration comprises of two phases
+1.Declaring 
+  var product;
+  let product;
+  
+2. Assignng memory for array by using [] or array()
+  product=[]              //[]->meta character
+  When we have static value we use this.--> contionus memory
+  product = new array();  //array()-> constructor
+  when we have dynamic values ,data is taken and deeted after use by new keyword.-->discrete memory
+     
+Stroing data into array:
+1.you can intialization data into array.
+var product = ["A",10,20,true];
+var product = new array("A",10,20,true);
+2.you can assign data into array. 
+ In other languages array can store values by using index values,but in js it uses property value to store data.
+ 
+                           [0]   --> Index value
+					    ---------
+						|        |
+						----------
+                           "0"   --> property value
+
+   - it allows destrictring.
+
+
+Methods in arrays:
+1.length      : return total count of elements in array.
+2.Methods to read values
+   a)toString()    --> It used , as a default delimeter
+   2)join()        --> seperate with custom delimeter 
+   3)slice()       --> using specified index
+   4)find()        --> It retun first oocrance to match condition.
+   e)filter()      --> it return all occurance that match condition
+   f)map()         --> it use callback function and iterate each element in array.
+   
+   
+   
+   var categ = ["electronic","footware","fashion"];
+document.write(categ.toString());          // It used , as a default delimeter
+document.write(`<br>${categ.join()}`);     // seperate with custom delimeter 
+document.write(`<br>${categ.slice()}`);    // using specified index
+categ.map(function(cate){
+    document.write(`<li>${cate}</li>`);
+})
+   
+var   sales = [3500,600,80000,71000];
+var result = sales.find(function(value){
+return value>50000;
+})
+document.write(result);
+output--> 71000 only first occurance
+   
+   
+-- for..in 
+  It is an iterator used to read all properties from array.
+  syntax:for(var property in collection){
+  }
+-- for..of
+  It is an iterator used to read all elements[values] from array.
+   syntax: for(var item of collection){
+   }
+   
+--- Add elements to array
+    push()    --> It add elemnts at last
+	var sales = [3500,600,80000,71000];
+          sales.push(1000000);
+		  output->  3500,600,80000,71000,1000000
+	unshif()  --> It add element at first 
+	var sales = [3500,600,80000,71000];
+           sales.unshift(1000000);
+		   output --> 1000000,3500,600,80000,71000
+	splice()   --> it add at any place 
+	cooelction.splice(indexnumber,deletcount,"item1","item2"....)
+	         var sales = [3500,600,80000,71000];
+             sales.splice(3,0,976378);
+        
+-- Delete Elements in array
+   pop()   :Delete last element 
+   shift() :delete first element
+   splice() :we can delet any number
+   cooelction.splice(indexnumber,deletcount,"item1","item2"....)
+	         var sales = [3500,600,80000,71000];
+             sales.splice(3,0,976378);
+   
+----------------------------------------------------------------------------------
+copy of array:
+..............1..................
+var sales = [3500,600,80000,71000];
+var menu = sales;
+document.write(menu);
+
+............2...............
+Shallow copy
+   var sales = [3500,600,80000,71000];
+   var menu = array.from(sales);
+   document.write(menu);
+..................3...............
+ Deep copy
+ var sales = [3500,600,80000,71000];
+   var menu = JSON.parse(JASON.strinfiy(sales));
+document.write(menu);
+
+---------------------------------------------------------------------
+- sort() : which arrange all in ascending order
+- reverse()  : which arrange all elements in reverse order
+
+-------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+object type:
+- It is a set of properties and functions.
+- objects is store all related data and logic together.
+- data and logic is stored in form of key-value pair.
+   poduct{
+   "name"  : "samsung  tv",
+   "price" : 70000,
+   "stock" : true,
+   "city"  : "Hyderbad"
+   }   
+- If there is only data and no-logic in objetc then it is called as JSON[JavaScript Objecty Notation]
+- JSON format is used to represent in JSON,XML.
+   
+
+JSON Format:--
+   {
+	   "Name"  : "samsung  tv",
+       "Price" : 70000,
+       "stock" : true,
+       "city"  : "Hyderbad"
+	}
+	
+XML Format:--
+<product>
+  <name>Samsung tv</name>
+  <price>70000</price>
+  <stock>true</stock>
+  <city>hyderbad</city>
+</product>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
